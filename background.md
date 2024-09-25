@@ -30,7 +30,7 @@ where $\Delta L$ is the difference of between the current loss function and the 
 When the optimal unbinding direction $x$ is determined using the minimization method, the ligand is biased towards $x$ within the tunnel. This is accomplished by applying an adaptive harmonic potential:
 
 $$
-V(x_{k+1})=h\left(vt - (x - x^\*_{k})\cdot\frac{x^\*_{k+1} - x_{k+1}}{\|x^\*_{k+1}-x_{k+1}\|}\right)^2,
+V(x_{k+1})=h\left(vt - (x - x'_{k})\cdot\frac{x'_{k+1} - x_{k+1}}{\|x'_{k+1}-x_{k+1}\|}\right)^2,
 $$
 
 where ${x}^*_k$ is the optimal solution at time $k$, $v$ is the
