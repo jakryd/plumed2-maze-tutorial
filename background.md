@@ -33,7 +33,7 @@ When the optimal unbinding direction $x$ is determined using the minimization me
 V(x_{k+1})=h\left(vt - (x - x'_{k})\cdot\frac{x'_{k+1} - x_{k+1}}{\|x'_{k+1}-x_{k+1}\|}\right)^2,
 ```
 
-where ${x}^*_k$ is the optimal solution at time $k$, $v$ is the
+where $x'_k$ is the optimal solution at time $k$, $v$ is the
 biasing rate, and $h$ is the scale constant. A detailed explanation can be found in [[1]](#1).
 
 <center><img src="fig/scheme.jpeg" width="400"/></center>
