@@ -29,16 +29,16 @@ where $\Delta L$ is the difference of between the current loss function and the 
 #### Adaptive Biasing
 When the optimal unbinding direction $x$ is determined using the minimization method, the ligand is biased towards $x$ within the tunnel. This is accomplished by applying an adaptive harmonic potential:
 
-$$
+```math
 V(x_{k+1})=h\left(vt - (x - x'_{k})\cdot\frac{x'_{k+1} - x_{k+1}}{\|x'_{k+1}-x_{k+1}\|}\right)^2,
-$$
+```
 
 where ${x}^*_k$ is the optimal solution at time $k$, $v$ is the
 biasing rate, and $h$ is the scale constant. A detailed explanation can be found in [[1]](#1).
 
 <center><img src="fig/scheme.jpeg" width="400"/></center>
 
-*Figure* Unbinding is initiated from the bound state (X-ray binding site) of the T4L-benzene complex and ends once the ligand reaches the solvent. (a) The cross-section through the X-ray structure of T4L shows no apparent tunnels for benzene to leave the protein, which means that the protein must undergo structural changes to open possible exits. (b) A reaction pathway characterizing the unbinding along the exit tunnel is identified locally during MD simulations. (c) To determine the $(k + 1)$th intermediate, the conformations of benzene are sampled in the neighborhood of the $k$th intermediate. Then, from the sampled ligand conformations, the optimal biasing direction is calculated by selecting the ligand conformation with the lowest loss function value.
+*Figure* Unbinding is initiated from the bound state (X-ray binding site) of the T4L-benzene complex and ends once the ligand reaches the solvent. (a) The cross-section through the X-ray structure of T4L shows no apparent tunnels for benzene to leave the protein, which means that the protein must undergo structural changes to open possible exits. (b) A reaction pathway characterizing the unbinding along the exit tunnel is identified locally during MD simulations. (c) To determine the (k+1)-th intermediate, the conformations of benzene are sampled in the neighborhood of the k-th intermediate. Then, from the sampled ligand conformations, the optimal biasing direction is calculated by selecting the ligand conformation with the lowest loss function value.
 
 ---
 
