@@ -18,8 +18,10 @@ $$
 where the sum goes over ligand-protein atom pairs in the local neighborhood of the ligand and $r_0$ is a cutoff. The user can choose to use any loss function implemented in PLUMED as a [switching function](https://www.plumed.org/doc-v2.9/user-doc/html/switchingfunction.html).
 
 #### Minimization
-The loss function will be minimized using simulated annealing. To this end, the method checks if a randomly chosen neighboring position of the ligand $x$ is preferred in terms of the loss function. The probability of accepting a randomly generated neighbor is given as::
-$$p = \min(1, \mathrm{e}^{-\beta \Delta L}),$$
+The loss function will be minimized using simulated annealing. To this end, the method checks if a randomly chosen neighboring position of the ligand $x$ is preferred in terms of the loss function. The probability of accepting a randomly generated neighbor is given as:
+$$
+p = \min(1, \mathrm{e}^{-\beta \Delta L}),
+$$
 where $\Delta L$ is the difference of between the current loss function and the loss function of the neighbor. 
 
 #### Adaptive Biasing
