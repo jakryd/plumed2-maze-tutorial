@@ -42,6 +42,6 @@ biasing rate, $h$ is the scale constant, and is the biasing rate, $\Delta t$ is 
 
 ---
 
-<a id="1">[1]</a>  J. Rydzewski, and O. Valsson, *Finding Multiple Reaction Pathways of Ligand Unbinding* J. Chem. Phys. 150, 221101 (2019) [doi:10.1038/s41592-019-0506-8](https://doi.org/10.1038/s41592-019-0506-8).
+<a id="1">[1]</a>  J. Rydzewski, and O. Valsson, *Finding Multiple Reaction Pathways of Ligand Unbinding* J. Chem. Phys. 150, 221101 (2019) [doi:10.1063/1.5108638](https://doi.org/10.1063/1.5108638).
 
 ---
