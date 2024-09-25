@@ -1,0 +1,52 @@
+GROUP ATOMS=2635-2646 LABEL=group_bnz
+GROUP ATOMS=1-2634 LABEL=group_t4l
+
+CENTER ATOMS=group_bnz LABEL=center_bnz
+CENTER ATOMS=group_t4l LABEL=center_t4l
+
+DISTANCE ATOMS=center_bnz,center_t4l LABEL=dist COMPONENTS
+DISTANCE ATOMS=center_bnz,center_t4l LABEL=dist_d
+
+MAZE_OPT_ANNEALING ...
+  LABEL=opt
+
+  GROUPA=group_bnz
+  GROUPB=group_t4l
+
+  SWITCH={EXP R_0=0.2}
+
+  STRIDE=500000
+
+  N_ITER=1000
+
+  BETA=0.9
+  BETA_FACTOR=1.005
+  BETA_SCHEDULE=GEOM
+
+  RANDOM_SEED=111
+  
+  NLIST
+  NL_CUTOFF=0.6
+  NL_STRIDE=100
+...
+
+MAZE_OPT_BIAS ...
+  LABEL=bias
+
+  ARG=dist.x,dist.y,dist.z
+
+  HEIGHT=1000.0
+
+  RATE=0.001
+
+  OPTIMIZER=opt
+...
+
+COMMITTOR ...
+  ARG=dist_d
+  STRIDE=5000
+  BASIN_LL1=3
+  BASIN_UL1=10
+...
+
+PRINT ARG=dist_d,opt.*,bias.bias FILE=colvar.dat FMT=%8.3f STRIDE=500
