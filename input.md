@@ -21,24 +21,34 @@ CENTER ATOMS=group_t4l LABEL=center_t4l
 Next, we declare an optimizer that will find a suboptimal (in terms of loss function) unbinding direction for the ligand. For this purpose, we will use the simulated annealing algorithm (`MAZE_OPT_ANNEALING`). The optimization will be run during the MD simulation every `STRIDE` MD steps with 1000 iterations to converge (`N_ITER`).
 
 ```plumed
+#HIDDEN
+GROUP ATOMS=2635-2646 LABEL=group_bnz
+GROUP ATOMS=1-2634 LABEL=group_t4l
+
+CENTER ATOMS=group_bnz LABEL=center_bnz
+CENTER ATOMS=group_t4l LABEL=center_t4l
+#ENDHIDDEN
 MAZE_OPT_ANNEALING ...
   LABEL=opt
 
   GROUPA=group_bnz
   GROUPB=group_t4l
 
+  SWITCH={EXP R_0=0.2}
+
   STRIDE=500000
 
   N_ITER=1000
+
   BETA=0.9
   BETA_FACTOR=1.005
   BETA_SCHEDULE=GEOM
 
+  RANDOM_SEED=111
+  
   NLIST
   NL_CUTOFF=0.6
   NL_STRIDE=100
-
-  SWITCH={EXP R_0=0.2}
 ...
 ```
 
@@ -57,6 +67,36 @@ Having defined the optimizer, we will pass it to the adaptive bias potential (se
 The `HEIGHT` and `RATE` keywords give the scale constant and rate, respectively.
 
 ```plumed
+#HIDDEN
+GROUP ATOMS=2635-2646 LABEL=group_bnz
+GROUP ATOMS=1-2634 LABEL=group_t4l
+
+CENTER ATOMS=group_bnz LABEL=center_bnz
+CENTER ATOMS=group_t4l LABEL=center_t4l
+
+MAZE_OPT_ANNEALING ...
+  LABEL=opt
+
+  GROUPA=group_bnz
+  GROUPB=group_t4l
+
+  SWITCH={EXP R_0=0.2}
+
+  STRIDE=500000
+
+  N_ITER=1000
+
+  BETA=0.9
+  BETA_FACTOR=1.005
+  BETA_SCHEDULE=GEOM
+
+  RANDOM_SEED=111
+  
+  NLIST
+  NL_CUTOFF=0.6
+  NL_STRIDE=100
+...
+#ENDHIDDEN
 DISTANCE ATOMS=center_bnz,center_t4l LABEL=dist COMPONENTS
 
 MAZE_OPT_BIAS ...
@@ -65,6 +105,7 @@ MAZE_OPT_BIAS ...
   ARG=dist.x,dist.y,dist.z
 
   HEIGHT=1000.0
+
   RATE=0.001
 
   OPTIMIZER=opt
@@ -74,6 +115,13 @@ MAZE_OPT_BIAS ...
 We will also declare a committor indicator to monitor when benzene reaches solvent and then stop the simulation.
 
 ```plumed
+#HIDDEN
+GROUP ATOMS=2635-2646 LABEL=group_bnz
+GROUP ATOMS=1-2634 LABEL=group_t4l
+
+CENTER ATOMS=group_bnz LABEL=center_bnz
+CENTER ATOMS=group_t4l LABEL=center_t4l
+#ENDHIDDEN
 DISTANCE ATOMS=center_bnz,center_t4l LABEL=dist_d
 
 COMMITTOR ...

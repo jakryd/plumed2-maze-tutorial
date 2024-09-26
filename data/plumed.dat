@@ -4,9 +4,6 @@ GROUP ATOMS=1-2634 LABEL=group_t4l
 CENTER ATOMS=group_bnz LABEL=center_bnz
 CENTER ATOMS=group_t4l LABEL=center_t4l
 
-DISTANCE ATOMS=center_bnz,center_t4l LABEL=dist COMPONENTS
-DISTANCE ATOMS=center_bnz,center_t4l LABEL=dist_d
-
 MAZE_OPT_ANNEALING ...
   LABEL=opt
 
@@ -30,6 +27,8 @@ MAZE_OPT_ANNEALING ...
   NL_STRIDE=100
 ...
 
+DISTANCE ATOMS=center_bnz,center_t4l LABEL=dist COMPONENTS
+
 MAZE_OPT_BIAS ...
   LABEL=bias
 
@@ -41,6 +40,8 @@ MAZE_OPT_BIAS ...
 
   OPTIMIZER=opt
 ...
+
+DISTANCE ATOMS=center_bnz,center_t4l LABEL=dist_d
 
 COMMITTOR ...
   ARG=dist_d
