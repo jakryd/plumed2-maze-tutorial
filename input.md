@@ -1,12 +1,12 @@
-##### [&larr;](NAVIGATION.md)
+##### [&larr; Home](NAVIGATION.md)
 
 ### Input
 
-In the `data` trajectory available in the [GitHub repository](https://github.com/jakryd/plumed2-maze-tutorial) you will find all the initial files needed to complete this tutorial.
+Files needed to complete this tutorial are provided in the `data` directory available in the [GitHub repository](https://github.com/jakryd/plumed2-maze-tutorial).
 
 #### Groups
 
-We first define the groups of atoms consisting of T4L (atoms 1-2634) and benzene (atoms 2635-2646) and their center of masses. This will be passed to the optimizer later. 
+We first define the groups of atoms consisting of T4L (atoms 1-2634) and benzene (atoms 2635-2646) and their center of masses. These definitions will be passed to an optimizer later. 
 
 ```plumed
 GROUP ATOMS=2635-2646 LABEL=group_bnz
@@ -18,7 +18,7 @@ CENTER ATOMS=group_t4l LABEL=center_t4l
 
 #### Optimizer and Loss Function
 
-Next, we declare an optimizer that will find a suboptimal (in terms of loss function) unbinding direction for the ligand. For this purpose, we will use the simulated annealing algorithm (`MAZE_OPT_ANNEALING`). The optimization will be run during the MD simulation every `STRIDE` MD steps with 1000 iterations to converge (`N_ITER`).
+Next, we declare an optimizer that will find a suboptimal (in terms of loss function) unbinding direction for the ligand. For this purpose, we will use the simulated annealing algorithm (`MAZE_OPT_ANNEALING`). The optimization will be run during the MD simulation every `STRIDE` MD steps (here 1 ns) with 1000 iterations to converge (`N_ITER`).
 
 ```plumed
 #HIDDEN
@@ -52,15 +52,15 @@ MAZE_OPT_ANNEALING ...
 ...
 ```
 
-The `BETA` options are required to select an annealing scheme. Here, we will start with an inverse temperature parameter $\beta$ multiplied by a factor of 1.05 every iteration (`BETA_SCHEDULE=GEOM`). This is a standard setup -- interested readers can read more about it [here]([sss](https://en.wikipedia.org/wiki/Simulated_annealing)).
+The `BETA` options are required to select an annealing scheme. Here, we will start with an inverse temperature parameter $\beta=0.9$ multiplied by a factor of 1.005 every iteration (`BETA_SCHEDULE=GEOM`). This is a standard setup -- interested readers can read more about it [here](https://en.wikipedia.org/wiki/Simulated_annealing)).
 
-To speed up calculations, we will use a neighbor list `NLIST` with a cutoff of 0.6 nm for distances between ligand-protein atom pairs (see [PLUMED Neighbor Lists](https://www.plumed.org/doc-v2.9/user-doc/html/_neighbour.html)). The neighbor list will be recalculated every 10 steps (`NL_STRIDE`).
+To speed up calculations, we will use a neighbor list `NLIST` with a cutoff of 0.6 nm for distances between ligand-protein atom pairs (see [PLUMED Neighbor Lists](https://www.plumed.org/doc-v2.9/user-doc/html/_neighbour.html)). The neighbor list will be recalculated every 100 steps (`NL_STRIDE`).
 
-The `SWITCH` keyword specifies the loss function to optimize. The same functionality is provided for switching functions required to define collective variables such as coordination numbers. See [here](https://www.plumed.org/doc-v2.9/user-doc/html/switchingfunction.html) for switching functions available in PLUMED. Here, we will use an exponential loss function explained in [Background](background.md).
+The `SWITCH` keyword specifies the loss function to optimize. The same functionality is provided for switching functions required to define collective variables such as coordination numbers. See [here](https://www.plumed.org/doc-v2.9/user-doc/html/switchingfunction.html) for switching functions available in PLUMED. Here, we will use an exponential loss function as explained in [Background](background.md).
 
 #### Bias
 
-Having defined the optimizer, we will pass it to the adaptive bias potential (see [here](background.md#adaptive-biasing)). The bias will be used to steer benzene along the found optimal direction. The adaptive bias also requires a collective variable with Cartesian components to drive the ligand toward solvent. 
+Having defined the optimizer, we will pass it to the adaptive bias potential (see [here](background.md#adaptive-biasing)). The bias will be used to steer benzene in the optimal direction found by simulated annealing. This also requires a collective variable with Cartesian components to drive the ligand toward solvent. 
 
 *Note* Biasing absolute positions of any system can result in problems (see a detailed explanation [here](https://www.plumed.org/doc-v2.9/user-doc/html/_p_o_s_i_t_i_o_n.html)) and may require additional position restraints. Thus, it is required that it must be a distance with `COMPONENTS`. As such, the biasing corresponds to a relative position, and additional restraints are not required. 
 
@@ -112,7 +112,7 @@ MAZE_OPT_BIAS ...
 ...
 ```
 
-We will also declare a committor indicator to monitor when benzene reaches solvent and then stop the simulation.
+We will also define a committor indicator to halt the simulation once benzene enters the solvent, which occurs approximately when the distance between the ligand and the protein exceeds 3 nm.
 
 ```plumed
 #HIDDEN
@@ -134,4 +134,8 @@ COMMITTOR ...
 
 #### Simulation
 
-We are finally ready to run the simulation. The above parameters are selected so that the ligand-protein complex can dissociate within 10 ns.
+We are ready to run the simulation.
+
+The simulation will save two files: `colvar.dat` and `optimizer.dat`. The `colvar.dat` file contains all the information we want to save using the `PRINT` action, while the `optimizer.dat` file contains data related to the optimization results (see [here](https://github.com/jakryd/plumed2-maze-tutorial/tree/main/data)).
+
+##### [Results &rarr;](results.md)

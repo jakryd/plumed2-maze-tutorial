@@ -1,7 +1,9 @@
 ### `maze` Tutorial
-A PLUMED tutorial to run ligand unbinding trajectories with `maze`. The original work which explains the background for `maze` simulations is published in [[1]](#1). Implementation details are summarized in [[2]](#2).
+A PLUMED tutorial to run ligand unbinding trajectories with `maze`. The original work, which explains the background of `maze` simulations, is published in [[1]](#1). Implementation details are summarized in [[2]](#2).
 
-This tutoral uses a recent implementation of `maze` which differs from the original one. The new version is accessible [here](https://github.com/jakryd/plumed2-maze) and will be merged into PLUMED soon. For information on how to compile it, see [here](https://www.plumed.org/doc-v2.4/user-doc/html/_installation.html). The `maze` module must be enabled during compilation.
+**This tutoral uses a recent implementation of `maze` which differs from the original one**. 
+
+The new version is accessible [here](https://github.com/jakryd/plumed2-maze) and will be merged into PLUMED soon. For information on how to compile it, see [here](https://www.plumed.org/doc-v2.4/user-doc/html/_installation.html). The `maze` module must be enabled during compilation.
 
 This tutorial covers the following:
 

@@ -1,18 +1,20 @@
-##### [&larr;](NAVIGATION.md)
+##### [&larr; Home](NAVIGATION.md)
 
 ### Results
 
-In our previous paper [[1]](#1), we ran around 300 short trajectories and identified the dissociation pathways visible in Figure, where each pathway is named pwa, pwd, ..., and by T4L helices through which benzene dissociated. You should be able to obtain one of these pathways using the parameters chosen in this tutorial.
+In our previous paper [[1]](#1), we ran around 300 short trajectories and identified dissociation pathways shown in Figure, where each pathway is named pwa, pwb, ..., and by T4L helices through which benzene dissociated. 
+
+Using the parameters selected in this tutorial, we should be able to obtain one of these pathways within 10 ns.
 
 <center><img src="fig/paths.png" width="500"/></center>
 
-Simulations carried out using `maze` will save two files: `colvar.data` and `optimizer.dat`. The `colvar.data` file contains all the information that we want to print using the `PRINT` action of PLUMED, while the `optimizer.dat` file contains data related to the optimization results.
+In the example calculated here, the simulation ends around 2.5 ns, resulting in an unbinding pathway shown below. To find an exit from T4L, the pulling direction of benzene was optimized three times (at 0, 1, and 2 ns). 
 
-This simulation ended around 2.5 ns and resulted in an unbinding pathway shown below. The pulling direction was optimized three times (at 0, 1, and 2 ns). See the figure below for overlayed conformations of the T4L-benzene complex sampled during the simulation.
+By displaying overlayed conformations of the T4L-benzene complex sampled during the simulation, we can see which helices fluctuate the most during the dissociation. 
 
 <center><img src="fig/dissociation.png" width="300"/></center>
 
-The next figure shows how the loss function behaves in time. We can see that beginning from 1.5 ns, it starts to decay to zero. This means that benzene unbinds from T4L and begins to reach solvent.
+The next figure shows how the loss function behaves in time. We can see that starting from 1.5 ns, it decays to zero, which means that benzene unbinds from the binding pocket of T4L and diffuses toward solvent.
 
 <center><img src="fig/time-loss.png" width="500"/></center>
 
@@ -20,7 +22,7 @@ This point also coincides with the peak in the bias potential, suggesting that t
 
 <center><img src="fig/time-bias.png" width="500"/></center>
 
-Such benzene dissociation pathways can be later used to define reference frames for path collective variables to run a metadynamics simulation with which a free-energy profile can be calculated. For details on this, please see [here](https://www.plumed.org/doc-v2.9/user-doc/html/_p_a_t_h.html).
+*Note* Dissociation pathways obtained using the `maze` module can define reference frames for path collective variables, which can be used to run a metadynamics simulation and calculate a free-energy profile. For further details on this, see [here](https://www.plumed.org/doc-v2.9/user-doc/html/_p_a_t_h.html).
 
 ---
 
