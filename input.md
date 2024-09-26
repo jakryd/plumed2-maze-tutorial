@@ -9,7 +9,7 @@ In the `data` trajectory available in the [GitHub repository](https://github.com
 We first define the groups of atoms consisting of T4L (atoms 1-2634) and benzene (atoms 2635-2646) and their center of masses. This will be passed to the optimizer later. 
 
 ```plumed
-GROUP ATOMS=2635-2646 LABEL=ground_bnz
+GROUP ATOMS=2635-2646 LABEL=group_bnz
 GROUP ATOMS=1-2634 LABEL=group_t4l
 
 CENTER ATOMS=group_bnz LABEL=center_bnz
