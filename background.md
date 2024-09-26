@@ -36,7 +36,7 @@ V(x)=h\left(v\Delta t - (x - x'_{k-1})\cdot\frac{x'_{k} - x'_{k-1}}{\|x'_{k}-x'_
 where $x'_k$ is the optimal solution at step $k$, $v$ is the
 biasing rate, $h$ is the scale constant, and is the biasing rate, $\Delta t$ is the MD time between subsequent loss function minimizations. A detailed explanation can be found in [[1]](#1).
 
-<center><img src="fig/scheme.jpeg" width="400"/></center>
+<center><img src="fig/scheme.png" width="500"/></center>
 
 *Figure* Unbinding is initiated from the bound state (X-ray binding site) of the T4L-benzene complex and ends once the ligand reaches the solvent. (a) The cross-section through the X-ray structure of T4L shows no apparent tunnels for benzene to leave the protein, which means that the protein must undergo structural changes to open possible exits. (b) A reaction pathway characterizing the unbinding along the exit tunnel is identified locally during MD simulations. (c) To determine the (k+1)-th intermediate, the conformations of benzene are sampled in the neighborhood of the k-th intermediate. Then, from the sampled ligand conformations, the optimal biasing direction is calculated by selecting the ligand conformation with the lowest loss function value.
 
